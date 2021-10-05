@@ -3,7 +3,6 @@
 }
 
 .Board {
-  width: 50%;
   border: 3vh solid #2f3607;
   margin: auto;
   width: fit-content;
@@ -12,19 +11,18 @@
   width: 80vh;
   height: 10vh;
 }
-.Board .BoardRow .BoardColumn {
+.Board .BoardRow .BoardCell {
   width: 10vh;
   height: 10vh;
   background: black;
   float: left;
-  position: relative;
 }
-.Board .BoardRow .BoardColumn.validMove:hover {
-  background: lime !important;
+.Board .BoardRow .BoardCell.validMove:hover {
+  background: #0f0;
   opacity: 0.3;
 }
 
-.BoardRow:nth-child(odd) .BoardColumn:nth-child(even), .BoardRow:nth-child(even) .BoardColumn:nth-child(odd) {
+.BoardRow:nth-child(odd) .BoardCell:nth-child(even), .BoardRow:nth-child(even) .BoardCell:nth-child(odd) {
   background: white;
 }
 

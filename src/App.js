@@ -9,7 +9,7 @@ import MovementsList from './widgets/MovementsList';
 function App() {
   return (
     <div className="App">
-      <Board />
+      <Board size="8" />
       <MovementsList />
     </div>
   );
