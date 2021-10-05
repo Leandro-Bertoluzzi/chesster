@@ -1,0 +1,25 @@
+.Board {
+    width: 50%;
+    border: 3vh solid rgb(47, 54, 7);
+    margin: auto;
+    width: fit-content;
+    .BoardRow {
+        width: 80vh;
+        height: 10vh;
+        .BoardColumn {
+            width: 10vh;
+            height: 10vh;
+            background: black;
+            float: left;
+            position: relative;
+            &.validMove:hover {
+                background: rgba(0, 255, 0) !important;
+                opacity: 0.3;
+            }
+        }
+    }
+}
+
+.BoardRow:nth-child(odd) .BoardColumn:nth-child(even), .BoardRow:nth-child(even) .BoardColumn:nth-child(odd) {
+    background: white;
+}
