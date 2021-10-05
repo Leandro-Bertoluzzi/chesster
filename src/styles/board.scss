@@ -1,15 +1,18 @@
 $validColor: #0f0;
+$boardBorderColor: rgb(121, 88, 0);
 
 .Board {
-    border: 3vh solid rgb(47, 54, 7);
+    border: 20px solid $boardBorderColor;
     margin: auto;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
     .BoardRow {
-        width: 80vh;
-        height: 10vh;
+        display: flex;
+        flex-direction: row;
         .BoardCell {
-            width: 10vh;
-            height: 10vh;
+            width: 40px;
+            height: 40px;
             background: black;
             float: left;
             &.validMove:hover {
@@ -17,9 +20,9 @@ $validColor: #0f0;
                 opacity: 0.3;
             }
         }
+        &:nth-child(odd) .BoardCell:nth-child(even),
+        &:nth-child(even) .BoardCell:nth-child(odd) {
+            background: white;
+        }
     }
-}
-
-.BoardRow:nth-child(odd) .BoardCell:nth-child(even), .BoardRow:nth-child(even) .BoardCell:nth-child(odd) {
-    background: white;
 }

@@ -3,17 +3,19 @@
 }
 
 .Board {
-  border: 3vh solid #2f3607;
+  border: 20px solid #795800;
   margin: auto;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 .Board .BoardRow {
-  width: 80vh;
-  height: 10vh;
+  display: flex;
+  flex-direction: row;
 }
 .Board .BoardRow .BoardCell {
-  width: 10vh;
-  height: 10vh;
+  width: 40px;
+  height: 40px;
   background: black;
   float: left;
 }
@@ -21,8 +23,7 @@
   background: #0f0;
   opacity: 0.3;
 }
-
-.BoardRow:nth-child(odd) .BoardCell:nth-child(even), .BoardRow:nth-child(even) .BoardCell:nth-child(odd) {
+.Board .BoardRow:nth-child(odd) .BoardCell:nth-child(even), .Board .BoardRow:nth-child(even) .BoardCell:nth-child(odd) {
   background: white;
 }
 
