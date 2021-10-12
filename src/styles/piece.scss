@@ -1,0 +1,41 @@
+// Piece names
+$pieces: "white-tower",
+    "white-horse",
+    "white-bishop",
+    "white-queen",
+    "white-king",
+    "white-pawn",
+    "black-tower",
+    "black-horse",
+    "black-bishop",
+    "black-queen",
+    "black-king",
+    "black-pawn";
+
+.Piece {
+    position: absolute;
+    width: $boardCellSize;
+    height: $boardCellSize;
+    opacity: 0.75;
+    transition: all 1.5s ease;
+    background-repeat: no-repeat;
+    background-size: $boardCellSize;
+
+    // Iterate over array with name of pieces and generate class for each one, with its corresponding image
+    // &.{{color + pieceName}} { background: url_sprite }
+    @each $piece in $pieces {
+        &.#{$piece} {
+            background-image: url('resources/' + $piece + '.png');
+        }
+    }
+    
+    // Generate classes for each position on the board
+    @for $i from 1 through 8 {
+        &.x-#{$i} {
+            left: ($i - 1)*$boardCellSize;
+        }
+        &.y-#{$i} {
+            top: ($i - 1)*$boardCellSize;
+        }
+    }
+}

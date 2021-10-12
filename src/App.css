@@ -8,6 +8,7 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .Board .BoardRow {
   display: flex;
@@ -16,7 +17,7 @@
 .Board .BoardRow .BoardCell {
   width: 40px;
   height: 40px;
-  background: black;
+  background: #583200;
   float: left;
 }
 .Board .BoardRow .BoardCell.validMove:hover {
@@ -25,6 +26,100 @@
 }
 .Board .BoardRow:nth-child(odd) .BoardCell:nth-child(even), .Board .BoardRow:nth-child(even) .BoardCell:nth-child(odd) {
   background: white;
+}
+
+.Piece {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.75;
+  transition: all 1.5s ease;
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+.Piece.white-tower {
+  background-image: url("resources/white-tower.png");
+}
+.Piece.white-horse {
+  background-image: url("resources/white-horse.png");
+}
+.Piece.white-bishop {
+  background-image: url("resources/white-bishop.png");
+}
+.Piece.white-queen {
+  background-image: url("resources/white-queen.png");
+}
+.Piece.white-king {
+  background-image: url("resources/white-king.png");
+}
+.Piece.white-pawn {
+  background-image: url("resources/white-pawn.png");
+}
+.Piece.black-tower {
+  background-image: url("resources/black-tower.png");
+}
+.Piece.black-horse {
+  background-image: url("resources/black-horse.png");
+}
+.Piece.black-bishop {
+  background-image: url("resources/black-bishop.png");
+}
+.Piece.black-queen {
+  background-image: url("resources/black-queen.png");
+}
+.Piece.black-king {
+  background-image: url("resources/black-king.png");
+}
+.Piece.black-pawn {
+  background-image: url("resources/black-pawn.png");
+}
+.Piece.x-1 {
+  left: 0px;
+}
+.Piece.y-1 {
+  top: 0px;
+}
+.Piece.x-2 {
+  left: 40px;
+}
+.Piece.y-2 {
+  top: 40px;
+}
+.Piece.x-3 {
+  left: 80px;
+}
+.Piece.y-3 {
+  top: 80px;
+}
+.Piece.x-4 {
+  left: 120px;
+}
+.Piece.y-4 {
+  top: 120px;
+}
+.Piece.x-5 {
+  left: 160px;
+}
+.Piece.y-5 {
+  top: 160px;
+}
+.Piece.x-6 {
+  left: 200px;
+}
+.Piece.y-6 {
+  top: 200px;
+}
+.Piece.x-7 {
+  left: 240px;
+}
+.Piece.y-7 {
+  top: 240px;
+}
+.Piece.x-8 {
+  left: 280px;
+}
+.Piece.y-8 {
+  top: 280px;
 }
 
 /*# sourceMappingURL=App.css.map */

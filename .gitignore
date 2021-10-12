@@ -12,6 +12,9 @@
 # SASS files
 *.css.map
 
+# Notes
+/notes
+
 # misc
 .DS_Store
 .env.local
