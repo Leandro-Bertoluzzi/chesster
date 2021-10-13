@@ -57,9 +57,6 @@ class Board extends Component {
     }
 
     setSelectedPiece(x, y, color) {
-        // First of all, we mark the cell with the piece as selected
-        // this.setSelectedCell(x, y);
-
         // If the same piece is clicked twice in a row, it is unselected
         if (JSON.stringify(this.state.selectedPiece) === JSON.stringify({x, y, color})) {
             this.setState({ selectedPiece: invalidPiece });
@@ -68,6 +65,9 @@ class Board extends Component {
             this.setState({ selectedPiece: {x, y, color} });
             this.setState({isSelectedPiece: true});
         }
+        
+        // We mark the cell with the piece as the selected one
+        this.setSelectedCell(x, y);
     }
 
     setSelectedCell(x, y) {
@@ -90,16 +90,16 @@ class Board extends Component {
     }
     
     render() {
-        // We initialize rows
+        // We update the rows
         var rows = [];
         for (var i = 0; i < this.props.size; i++) {
-            rows.push(<BoardRow setSelected={this.setSelectedCell} y={i+1} size={this.props.size} selectedPieceX={this.state.selectedPiece.x} isSelectedPieceRow={this.state.selectedPiece.y === i+1} key={i} />);
+            rows.push(<BoardRow setSelected={this.setSelectedCell} y={i+1} size={this.props.size} selectedPiece={this.state.selectedPiece} key={i} />);
         }
-        // We initialize pieces
+        // We update the pieces
         var pieces = [];
         var piecesInfo = this.state.piecesInfo;
         for (i = 0; i < piecesInfo.length; i++) {
-            pieces.push(<Piece key={i} setSelected={this.setSelectedPiece} x={piecesInfo[i].x} y={piecesInfo[i].y} color={piecesInfo[i].color} name={piecesInfo[i].name} />);
+            pieces.push(<Piece key={i} setSelected={this.setSelectedPiece} data={piecesInfo[i]} />);
         }
         return (
             <div className="Board">
@@ -115,7 +115,7 @@ class Board extends Component {
 function BoardRow(props) {
     var cells = [];
     for (var i = 0; i < props.size; i++) {
-        cells.push(<BoardCell setSelected={props.setSelected} x={i+1} y={props.y} validMove={false} selectedPieceX={props.selectedPieceX} isSelectedPieceRow={props.isSelectedPieceRow} key={i} />);
+        cells.push(<BoardCell setSelected={props.setSelected} x={i+1} y={props.y} validMove={false} selectedPiece={props.selectedPiece} key={i} />);
     }
     return (
         <div className="BoardRow">{cells}</div>
@@ -130,9 +130,10 @@ function BoardCell(props) {
         props.setSelected(x, y);
     }
 
-    var isSelectedPiece = props.isSelectedPieceRow && props.selectedPieceX === props.x;
+    var isSelectedPiece = (props.selectedPiece.y === props.y) && (props.selectedPiece.x === props.x);
+    var isValidMove = props.validMove;
     return (
-        <div onClick={setSelected} className={"BoardCell" + (props.validMove ? " validMove" : "") + (isSelectedPiece ? " selectedPiece" : "")}></div>
+        <div onClick={setSelected} className={"BoardCell" + (isValidMove ? " validMove" : "") + (isSelectedPiece ? " selectedPiece" : "")}></div>
     );
 }
 

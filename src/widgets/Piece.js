@@ -1,10 +1,12 @@
 function Piece(props) {
     function setSelected() {
-        var {x, y, color} = props;
+        var {x, y, color} = props.data;
         props.setSelected(x, y, color);
     }
+
+    var { x, y, color, name } = props.data;
     return (
-        <div onClick={setSelected} className={"Piece " + props.color + "-" + props.name + " x-" + props.x + " y-" + props.y}></div>
+        <div onClick={setSelected} className={"Piece " + color + "-" + name + " x-" + x + " y-" + y}></div>
     );
   }
 
