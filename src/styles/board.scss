@@ -1,7 +1,7 @@
 $validColor: #0f0;
-$boardBorderColor: rgb(121, 88, 0);
+$boardBorderColor: #664422;
 $boardWhiteCellsColor: white;
-$boardBlackCellsColor: rgb(88, 50, 0);
+$boardBlackCellsColor: #997755;
 $boardCellSize: 40px;
 
 .Board {
@@ -14,19 +14,27 @@ $boardCellSize: 40px;
     .BoardRow {
         display: flex;
         flex-direction: row;
+        &:nth-child(even) .BoardCell:nth-child(even),
+        &:nth-child(odd) .BoardCell:nth-child(odd) {
+            background: $boardWhiteCellsColor;
+        }
         .BoardCell {
+            box-sizing: border-box;
             width: $boardCellSize;
             height: $boardCellSize;
             background: $boardBlackCellsColor;
             float: left;
-            &.validMove:hover {
-                background: $validColor;
+            &.validMove {
+                background: $validColor !important;
                 opacity: 0.3;
+                &:hover {
+                    opacity: 0.6;
+                }
             }
-        }
-        &:nth-child(odd) .BoardCell:nth-child(even),
-        &:nth-child(even) .BoardCell:nth-child(odd) {
-            background: $boardWhiteCellsColor;
+            &.selectedPiece {
+                border: 2px solid red;
+                border-radius: 2px;
+            }
         }
     }
 }
