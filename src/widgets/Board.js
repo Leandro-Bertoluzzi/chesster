@@ -38,7 +38,7 @@ var initialPiecesInfo = [
 ];
 
 // Useful global variables
-var invalidPiece = {x: 99, y: 99, color: "", name: ""};
+var invalidPiece = {x: 99, y: 99, color: "", name: "", firstMove:true};
 var invalidCell = {x: 99, y: 99};
 
 class Board extends Component {
@@ -57,14 +57,20 @@ class Board extends Component {
         this.setSelectedCell = this.setSelectedCell.bind(this);
         this.setValidMoves = this.setValidMoves.bind(this);
     }
+
+    componentDidMount() {
+        var piecesInfo = this.state.piecesInfo;
+        piecesInfo.forEach((element) => element.firstMove = true);
+        this.setState({ piecesInfo });
+    }
     
-    setSelectedPiece(x, y, color, name) {
+    setSelectedPiece(x, y, color, name, firstMove) {
         // If the same piece is clicked twice in a row, it is unselected
-        if (JSON.stringify(this.state.selectedPiece) === JSON.stringify({x, y, color, name})) {
+        if (JSON.stringify(this.state.selectedPiece) === JSON.stringify({x, y, color, name, firstMove})) {
             this.setState({ selectedPiece: invalidPiece });
             this.setState({isSelectedPiece: false});
         } else {
-            this.setState({ selectedPiece: {x, y, color, name} });
+            this.setState({ selectedPiece: {x, y, color, name, firstMove} });
             this.setState({isSelectedPiece: true});
         }
         
@@ -88,6 +94,7 @@ class Board extends Component {
                 var piecesInfo = this.state.piecesInfo;
                 piecesInfo[index].x = x;
                 piecesInfo[index].y = y;
+                piecesInfo[index].firstMove = false;
                 this.setState({ piecesInfo });
                 this.setState({ selectedPiece: invalidPiece });
                 this.setState({isSelectedPiece: false});
@@ -113,14 +120,16 @@ class Board extends Component {
             return;
         }
 
-        var {x, y, color, name} = this.state.selectedPiece;
+        var {x, y, color, name, firstMove} = this.state.selectedPiece;
         var validMoves = [];
         var i = 0;
 
         // We look for the valid moves for the selected piece
         if(name === "pawn"){
             validMoves.push({x: x, y: color === "white" ? y+1 : y-1});
-            validMoves.push({x: x, y: color === "white" ? y+2 : y-2});
+            if(firstMove) {
+                validMoves.push({x: x, y: color === "white" ? y+2 : y-2});
+            }
         } else if(name === "horse"){
             validMoves.push({x: x+1, y: y+2});
             validMoves.push({x: x-1, y: y+2});

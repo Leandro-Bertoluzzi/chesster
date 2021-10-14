@@ -1,7 +1,7 @@
 function Piece(props) {
     function setSelected() {
-        var {x, y, color, name} = props.data;
-        props.setSelected(x, y, color, name);
+        var {x, y, color, name, firstMove} = props.data;
+        props.setSelected(x, y, color, name, firstMove);
     }
 
     var { x, y, color, name } = props.data;
