@@ -192,10 +192,14 @@ class Board extends Component {
     }
     
     render() {
-        // We update the rows
+        // We update the cells
         var rows = [];
         for (var i = 0; i < this.props.size; i++) {
-            rows.push(<BoardRow setSelected={this.setSelectedCell} y={i+1} size={this.props.size} validMoves={this.state.validMoves} selectedPiece={this.state.selectedPiece} key={i} />);
+            var cells = [];
+            for(var j = 0; j < this.props.size; j++) {
+                cells.push(<BoardCell setSelected={this.setSelectedCell} x={j+1} y={i+1} validMoves={this.state.validMoves} selectedPiece={this.state.selectedPiece} key={i*this.props.size+j} />);
+            }
+            rows.push(<div className="BoardRow" key={i}>{cells}</div>);
         }
         // We update the pieces
         var pieces = [];
@@ -210,18 +214,6 @@ class Board extends Component {
             </div>
         );
     }
-}
-
-// Board row
-
-function BoardRow(props) {
-    var cells = [];
-    for (var i = 0; i < props.size; i++) {
-        cells.push(<BoardCell setSelected={props.setSelected} x={i+1} y={props.y} validMoves={props.validMoves} selectedPiece={props.selectedPiece} key={i} />);
-    }
-    return (
-        <div className="BoardRow">{cells}</div>
-    );
 }
 
 // Board cell
