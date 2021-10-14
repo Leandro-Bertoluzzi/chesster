@@ -70,6 +70,15 @@ class Board extends Component {
             this.setState({ selectedPiece: invalidPiece });
             this.setState({isSelectedPiece: false});
         } else {
+            // If there is a piece selected, we must clear validMoves so they are updated
+            if(this.state.isSelectedPiece) {
+                this.setState(prevState => {
+                    if(prevState.validMoves.length){
+                        return { validMoves: [] };
+                    }
+                });
+            }
+            // We assign the new selected piece
             this.setState({ selectedPiece: {x, y, color, name, firstMove} });
             this.setState({isSelectedPiece: true});
         }
