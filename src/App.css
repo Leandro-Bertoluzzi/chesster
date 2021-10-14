@@ -26,6 +26,7 @@
 }
 .Board .BoardRow .BoardCell.validMove {
   background: #0f0 !important;
+  border: 1px solid black;
   opacity: 0.3;
 }
 .Board .BoardRow .BoardCell.validMove:hover {
@@ -33,7 +34,7 @@
 }
 .Board .BoardRow .BoardCell.selectedPiece {
   border: 2px solid red;
-  border-radius: 2px;
+  border-radius: 10%;
 }
 
 .Piece {

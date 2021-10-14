@@ -75,10 +75,14 @@ class Board extends Component {
     setSelectedCell(x, y) {
         this.setState({ selectedCell: {x, y} });
 
-        if(this.state.isSelectedPiece) {
+        var index = this.state.validMoves.findIndex((element) => element.x === x && element.y === y);
+        var isValidMove = index !== -1;
+
+        // If there is a piece selected and the selected cell is valid, we move it to the selected cell
+        if(this.state.isSelectedPiece && isValidMove) {
             var xP = this.state.selectedPiece.x;
             var yP = this.state.selectedPiece.y;
-            var index = this.state.piecesInfo.findIndex((element) => element.x === xP && element.y === yP);
+            index = this.state.piecesInfo.findIndex((element) => element.x === xP && element.y === yP);
 
             if(index !== -1) {
                 var piecesInfo = this.state.piecesInfo;
