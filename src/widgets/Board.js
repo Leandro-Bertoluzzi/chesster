@@ -3,14 +3,14 @@ import Piece from '../widgets/Piece';
 
 // Initial pieces
 var initialPiecesInfo = [
-    {x:1,y:1,color:"white",name:"tower"},
-    {x:2,y:1,color:"white",name:"horse"},
+    {x:1,y:1,color:"white",name:"rook"},
+    {x:2,y:1,color:"white",name:"knight"},
     {x:3,y:1,color:"white",name:"bishop"},
     {x:4,y:1,color:"white",name:"king"},
     {x:5,y:1,color:"white",name:"queen"},
     {x:6,y:1,color:"white",name:"bishop"},
-    {x:7,y:1,color:"white",name:"horse"},
-    {x:8,y:1,color:"white",name:"tower"},
+    {x:7,y:1,color:"white",name:"knight"},
+    {x:8,y:1,color:"white",name:"rook"},
     {x:1,y:2,color:"white",name:"pawn"},
     {x:2,y:2,color:"white",name:"pawn"},
     {x:3,y:2,color:"white",name:"pawn"},
@@ -19,14 +19,14 @@ var initialPiecesInfo = [
     {x:6,y:2,color:"white",name:"pawn"},
     {x:7,y:2,color:"white",name:"pawn"},
     {x:8,y:2,color:"white",name:"pawn"},
-    {x:1,y:8,color:"black",name:"tower"},
-    {x:2,y:8,color:"black",name:"horse"},
+    {x:1,y:8,color:"black",name:"rook"},
+    {x:2,y:8,color:"black",name:"knight"},
     {x:3,y:8,color:"black",name:"bishop"},
     {x:4,y:8,color:"black",name:"king"},
     {x:5,y:8,color:"black",name:"queen"},
     {x:6,y:8,color:"black",name:"bishop"},
-    {x:7,y:8,color:"black",name:"horse"},
-    {x:8,y:8,color:"black",name:"tower"},
+    {x:7,y:8,color:"black",name:"knight"},
+    {x:8,y:8,color:"black",name:"rook"},
     {x:1,y:7,color:"black",name:"pawn"},
     {x:2,y:7,color:"black",name:"pawn"},
     {x:3,y:7,color:"black",name:"pawn"},
@@ -139,7 +139,7 @@ class Board extends Component {
             if(firstMove) {
                 validMoves.push({x: x, y: color === "white" ? y+2 : y-2});
             }
-        } else if(name === "horse"){
+        } else if(name === "knight"){
             validMoves.push({x: x+1, y: y+2});
             validMoves.push({x: x-1, y: y+2});
             validMoves.push({x: x+1, y: y-2});
@@ -157,7 +157,7 @@ class Board extends Component {
             validMoves.push({x: x-1, y: y-1});
             validMoves.push({x: x-1, y: y});
             validMoves.push({x: x-1, y: y+1});
-        } else if(name === "tower"){
+        } else if(name === "rook"){
             for(i = 0; i < this.props.size; i++) {
                 validMoves.push({x: x, y: i+1});
                 validMoves.push({x: i+1, y: y});

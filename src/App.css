@@ -46,11 +46,11 @@
   background-repeat: no-repeat;
   background-size: 36px;
 }
-.Piece.white-tower {
-  background-image: url("resources/white-tower.png");
+.Piece.white-rook {
+  background-image: url("resources/white-rook.png");
 }
-.Piece.white-horse {
-  background-image: url("resources/white-horse.png");
+.Piece.white-knight {
+  background-image: url("resources/white-knight.png");
 }
 .Piece.white-bishop {
   background-image: url("resources/white-bishop.png");
@@ -64,11 +64,11 @@
 .Piece.white-pawn {
   background-image: url("resources/white-pawn.png");
 }
-.Piece.black-tower {
-  background-image: url("resources/black-tower.png");
+.Piece.black-rook {
+  background-image: url("resources/black-rook.png");
 }
-.Piece.black-horse {
-  background-image: url("resources/black-horse.png");
+.Piece.black-knight {
+  background-image: url("resources/black-knight.png");
 }
 .Piece.black-bishop {
   background-image: url("resources/black-bishop.png");
