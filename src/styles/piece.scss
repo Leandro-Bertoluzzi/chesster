@@ -1,5 +1,6 @@
 // Variables
 $pieceMargin: 2px;
+$boardSize: 8;
 
 // Piece names
 $pieces: "white-tower",
@@ -33,7 +34,7 @@ $pieces: "white-tower",
     }
     
     // Generate classes for each position on the board
-    @for $i from 1 through 8 {
+    @for $i from 1 through $boardSize {
         &.x-#{$i} {
             left: ($i - 1)*$boardCellSize;
         }

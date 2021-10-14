@@ -38,7 +38,7 @@ var initialPiecesInfo = [
 ];
 
 // Useful global variables
-var invalidPiece = {x: 99, y: 99, color: "white"};
+var invalidPiece = {x: 99, y: 99, color: "", name: ""};
 var invalidCell = {x: 99, y: 99};
 
 class Board extends Component {
@@ -46,6 +46,7 @@ class Board extends Component {
         super(props);
         this.state = {
             piecesInfo: initialPiecesInfo,
+            validMoves: [],
             selectedPiece: invalidPiece,
             isSelectedPiece: false,
             selectedCell: invalidCell
@@ -54,15 +55,16 @@ class Board extends Component {
         // This is needed to make `this` work in the callback
         this.setSelectedPiece = this.setSelectedPiece.bind(this);
         this.setSelectedCell = this.setSelectedCell.bind(this);
+        this.setValidMoves = this.setValidMoves.bind(this);
     }
-
-    setSelectedPiece(x, y, color) {
+    
+    setSelectedPiece(x, y, color, name) {
         // If the same piece is clicked twice in a row, it is unselected
-        if (JSON.stringify(this.state.selectedPiece) === JSON.stringify({x, y, color})) {
+        if (JSON.stringify(this.state.selectedPiece) === JSON.stringify({x, y, color, name})) {
             this.setState({ selectedPiece: invalidPiece });
             this.setState({isSelectedPiece: false});
         } else {
-            this.setState({ selectedPiece: {x, y, color} });
+            this.setState({ selectedPiece: {x, y, color, name} });
             this.setState({isSelectedPiece: true});
         }
         
@@ -88,12 +90,90 @@ class Board extends Component {
             }
         }
     }
+
+    componentDidUpdate() {
+        this.setValidMoves();
+    }
+
+    setValidMoves() {
+        // If there is a piece selected and validMoves is already set, we have nothing to do
+        if(this.state.isSelectedPiece && this.state.validMoves.length) return;
+
+        // If there is no piece selected, we only must clear validMoves if needed
+        if(!this.state.isSelectedPiece) {
+            this.setState(prevState => {
+                if(prevState.validMoves.length){
+                    return { validMoves: [] };
+                }
+            });
+            return;
+        }
+
+        var {x, y, color, name} = this.state.selectedPiece;
+        var validMoves = [];
+        var i = 0;
+
+        // We look for the valid moves for the selected piece
+        if(name === "pawn"){
+            validMoves.push({x: x, y: color === "white" ? y+1 : y-1});
+            validMoves.push({x: x, y: color === "white" ? y+2 : y-2});
+        } else if(name === "horse"){
+            validMoves.push({x: x+1, y: y+2});
+            validMoves.push({x: x-1, y: y+2});
+            validMoves.push({x: x+1, y: y-2});
+            validMoves.push({x: x-1, y: y-2});
+            validMoves.push({x: x+2, y: y+1});
+            validMoves.push({x: x-2, y: y+1});
+            validMoves.push({x: x+2, y: y-1});
+            validMoves.push({x: x-2, y: y-1});
+        } else if(name === "king"){
+            validMoves.push({x: x, y: y-1});
+            validMoves.push({x: x, y: y+1});
+            validMoves.push({x: x+1, y: y-1});
+            validMoves.push({x: x+1, y: y});
+            validMoves.push({x: x+1, y: y+1});
+            validMoves.push({x: x-1, y: y-1});
+            validMoves.push({x: x-1, y: y});
+            validMoves.push({x: x-1, y: y+1});
+        } else if(name === "tower"){
+            for(i = 0; i < this.props.size; i++) {
+                validMoves.push({x: x, y: i+1});
+                validMoves.push({x: i+1, y: y});
+            }
+        } else if(name === "bishop"){
+            for(i = 0; i < this.props.size; i++) {
+                validMoves.push({x: x+i, y: y+i});
+                validMoves.push({x: x+i, y: y-i});
+                validMoves.push({x: x-i, y: y+i});
+                validMoves.push({x: x-i, y: y-i});
+            }
+        } else if(name === "queen"){
+            for(i = 0; i < this.props.size; i++) {
+                validMoves.push({x: x, y: i+1});
+                validMoves.push({x: i+1, y: y});
+                validMoves.push({x: x+i, y: y+i});
+                validMoves.push({x: x+i, y: y-i});
+                validMoves.push({x: x-i, y: y+i});
+                validMoves.push({x: x-i, y: y-i});
+            }
+        }
+
+        // We filter the moves outside the board
+        validMoves = validMoves.filter(cell => cell.x > 0 && cell.x <= this.props.size && cell.y > 0 && cell.y <= this.props.size);
+
+        // We update validMoves
+        this.setState(prevState => {
+            if(prevState.validMoves.length === 0 && validMoves.length){
+                return { validMoves };
+            }
+        });
+    }
     
     render() {
         // We update the rows
         var rows = [];
         for (var i = 0; i < this.props.size; i++) {
-            rows.push(<BoardRow setSelected={this.setSelectedCell} y={i+1} size={this.props.size} selectedPiece={this.state.selectedPiece} key={i} />);
+            rows.push(<BoardRow setSelected={this.setSelectedCell} y={i+1} size={this.props.size} validMoves={this.state.validMoves} selectedPiece={this.state.selectedPiece} key={i} />);
         }
         // We update the pieces
         var pieces = [];
@@ -115,7 +195,7 @@ class Board extends Component {
 function BoardRow(props) {
     var cells = [];
     for (var i = 0; i < props.size; i++) {
-        cells.push(<BoardCell setSelected={props.setSelected} x={i+1} y={props.y} validMove={false} selectedPiece={props.selectedPiece} key={i} />);
+        cells.push(<BoardCell setSelected={props.setSelected} x={i+1} y={props.y} validMoves={props.validMoves} selectedPiece={props.selectedPiece} key={i} />);
     }
     return (
         <div className="BoardRow">{cells}</div>
@@ -130,8 +210,11 @@ function BoardCell(props) {
         props.setSelected(x, y);
     }
 
-    var isSelectedPiece = (props.selectedPiece.y === props.y) && (props.selectedPiece.x === props.x);
-    var isValidMove = props.validMove;
+    var {x, y} = props;
+    var isSelectedPiece = (props.selectedPiece.y === y) && (props.selectedPiece.x === x);
+    
+    var index = props.validMoves.findIndex((element) => element.x === x && element.y === y);
+    var isValidMove = index !== -1;
     return (
         <div onClick={setSelected} className={"BoardCell" + (isValidMove ? " validMove" : "") + (isSelectedPiece ? " selectedPiece" : "")}></div>
     );
