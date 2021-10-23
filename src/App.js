@@ -2,13 +2,13 @@
 import './App.css';
 // Widgets
 import Board from './widgets/Board';
-import MovementsList from './widgets/MovementsList';
+import MovesList from './widgets/MovesList';
 
 function App() {
   return (
-    <div className="App">
+    <div className="Chesster">
       <Board size="8" />
-      <MovementsList />
+      <MovesList />
     </div>
   );
 }

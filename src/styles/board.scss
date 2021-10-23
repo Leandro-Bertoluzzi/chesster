@@ -6,7 +6,7 @@ $boardCellSize: 40px;
 
 .Board {
     border: 20px solid $boardBorderColor;
-    margin: auto;
+    //margin: auto;
     width: fit-content;
     display: flex;
     flex-direction: column;

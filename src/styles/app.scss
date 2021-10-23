@@ -1,7 +1,14 @@
-.App {
+.Chesster {
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    * {
+        box-sizing: border-box;
+    }
 }
 
 // Widgets
 @import "./board";
 @import "./piece";
+@import "./movementsList";
