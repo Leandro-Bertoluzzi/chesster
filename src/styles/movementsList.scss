@@ -1,4 +1,18 @@
+// Color palette
+$movesListBorderColor: #d9d9d9;
+$movesIndexBgColor: #f7f6f5;
+$movesIndexTextColor: #b3b3b3;
+$movesActiveBgColor: #c6ddf3;
+$movesActiveTextColor: #1f1f1f;
+$movesHovesBgColor: #1b78d0;
+$movesHoverTextColor: #ffffff;
+
+// Other variables
+$indexWidth: 12%;
+$moveWidth: (100% - $indexWidth) / 2;
+
 .MovesList {
+    border-radius: 5px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
     display: flex;
     flex-flow: column;
@@ -8,22 +22,22 @@
         font-size: 1rem;
     }
     .moves {
-        border-top: 1px solid #d9d9d9;
+        border-top: 1px solid $movesListBorderColor;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         .index {
-            flex: 0 0 12%;
+            flex: 0 0 $indexWidth;
             display: flex;
             justify-content: center;
-            border-right: 1px solid #d9d9d9;
-            border-left: 1px solid #d9d9d9;
-            background: #f7f6f5;
+            border-right: 1px solid $movesListBorderColor;
+            border-left: 1px solid $movesListBorderColor;
+            background: $movesIndexBgColor;
             line-height: 2.07em;
-            color: #b3b3b3;
+            color: $movesIndexTextColor;
         }
         .move {
-            flex: 0 0 44%;
+            flex: 0 0 $moveWidth;
             cursor: pointer;
             display: flex;
             font-size: 1.185em;
@@ -31,12 +45,12 @@
             padding: 0 0.3em 0 0.5em;
             &.active {
                 font-weight: bold;
-                background: #c6ddf3;
-                color: #1f1f1f;
+                background: $movesActiveBgColor;
+                color: $movesActiveTextColor;
             }
             &:hover {
-                background: #1b78d0;
-                color: #fff;
+                background: $movesHovesBgColor;
+                color: $movesHoverTextColor;
             }
         }
     }

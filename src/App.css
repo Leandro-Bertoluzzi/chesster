@@ -26,7 +26,7 @@
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-  background: #997755;
+  background: #B58863;
   float: left;
 }
 .Board .BoardRow .BoardCell.validMove {
@@ -137,6 +137,7 @@
 }
 
 .MovesList {
+  border-radius: 5px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   display: flex;
   flex-flow: column;
@@ -177,7 +178,7 @@
 }
 .MovesList .moves .move:hover {
   background: #1b78d0;
-  color: #fff;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=App.css.map */
