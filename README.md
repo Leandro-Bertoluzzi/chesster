@@ -29,7 +29,7 @@
 
 ## :dart: About ##
 
-This project is intended to render chess game notation as you play and also reproduce a game from its notation.
+This project is intended to render chess game notation as you play and also reproduce a game from its notation. You can see it working [here](https://chesster.vercel.app/).
 
 ## :sparkles: Features ##
 
